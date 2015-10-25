@@ -1,0 +1,15 @@
+{
+  "name": "malebranche",
+  "version": "1.0.1",
+  "description": "nothing at present but will be cool! ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "svg",
+    "clip-path"
+  ],
+  "author": "richard hunter <richard@richardhunter.co.uk> (richardhunter.co.uk)",
+  "license": "ISC"
+}
