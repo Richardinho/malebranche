@@ -8,20 +8,20 @@ describe('Malebranche tests', function () {
 			expect(malebranche.name).toBe('malebranche');
 		});
 	});
-	describe('isLegalElement()', function () {
+	describe('_isLegalElement()', function () {
 		it('should allow legal children', function () {
-			expect(malebranche.isLegalElement('path')).toBe(true);
-			expect(malebranche.isLegalElement('text')).toBe(true);
-			expect(malebranche.isLegalElement('use')).toBe(true);
-			expect(malebranche.isLegalElement('rect')).toBe(true);
-			expect(malebranche.isLegalElement('circle')).toBe(true);
-			expect(malebranche.isLegalElement('ellipse')).toBe(true);
-			expect(malebranche.isLegalElement('line')).toBe(true);
-			expect(malebranche.isLegalElement('polyline')).toBe(true);
-			expect(malebranche.isLegalElement('polygon')).toBe(true);
+			expect(malebranche._isLegalElement('path')).toBe(true);
+			expect(malebranche._isLegalElement('text')).toBe(true);
+			expect(malebranche._isLegalElement('use')).toBe(true);
+			expect(malebranche._isLegalElement('rect')).toBe(true);
+			expect(malebranche._isLegalElement('circle')).toBe(true);
+			expect(malebranche._isLegalElement('ellipse')).toBe(true);
+			expect(malebranche._isLegalElement('line')).toBe(true);
+			expect(malebranche._isLegalElement('polyline')).toBe(true);
+			expect(malebranche._isLegalElement('polygon')).toBe(true);
 		});
 		it('should disallow illegal children', function () {
-			expect(malebranche.isLegalElement('div')).toBe(false);
+			expect(malebranche._isLegalElement('div')).toBe(false);
 		});
 	});
 });

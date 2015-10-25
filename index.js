@@ -19,7 +19,9 @@ exports.allowedElementTypes = [
 	'path', 'text', 'use', 'rect', 'circle', 'ellipse', 'line', 'polyline', 'polygon'
 ];
 
-exports.isLegalElement = function(element) {
+
+
+exports._isLegalElement = function(element) {
 	return this.allowedElementTypes.indexOf(element) != -1;
 }
 
