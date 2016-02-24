@@ -1,4 +1,4 @@
-
+var fs = require('fs');
 var parse  = require('svg-path-parser');
 var xml2js = require('xml2js');
 var parseString = xml2js.parseString;
@@ -7,33 +7,42 @@ var util = require('util');
 var comma = ',';
 var space = '\u0020';
 
-exports.handlePolygon = function() {
 
 
+exports.handlePolygon = function(polygon) {
+//  get points attribute
+	console.log('polygon', polygon);
 }
-exports.handleText = function () {}
 
-exports.handlePolyLine = function () {};
+exports._handlePolygonElement = function(polygonEl) {
+	this.handlePolygon(polygonEl);
+};
 
-exports.handleCircle = function () {};
+exports.handleTextElement = function () {}
 
-exports.handleRectangle = function () {};
+exports.handlePolyLineElement = function () {};
 
-exports.handleUse = function () {};
+exports.handleCircleElement = function () {};
 
-exports.handleLine = function () {};
+exports.handleRectangleElement = function () {};
+
+exports.handleUseElement = function () {};
+
+exports.handleLineElement = function () {};
 
 //  handle paths
 exports._handlePathElement = function (pathArray) {
 	//  extract path string form path element
-	var path = pathArray[0]['$']['d'];
+	console.log('helo', pathArray);
+	var path = pathArray['path'][0]['$']['d'];
 	var convertedPath = this.handlePath(path);
-	pathArray[0]['$']['d'] = convertedPath;
+	pathArray['path'][0]['$']['d'] = convertedPath;
 }
 
 exports.handlePath = function (path) {
 	var pathCommands = parse(path);
 	//  transform coords from absolute into proportionate
+	//  then...
 	return this.serialize(pathCommands);
 }
 
@@ -63,6 +72,10 @@ exports._handleRelativeL = function (command) {
 	return 'l' + command.x + comma + command.y;
 };
 
+exports._handleC = function (command) {
+
+};
+
 exports._handleCommand = function(command) {
 	var result;
 	switch(command.code) {
@@ -81,6 +94,9 @@ exports._handleCommand = function(command) {
 	case 'l' : 
 		// handle l
 		result = this._handleRelativeL(command);
+		break;
+	case 'C' :
+		result = this._handleC(command);
 		break;
 	default:
 		throw {
@@ -117,9 +133,22 @@ exports.convertClipPath = function (clipPath) {
 		var childPathElementName = Object.keys(clipPath[i])[0];
 		switch(childPathElementName) {
 		case 'path':
-			this._handlePathElement(clipPath[i]);		
+			this._handlePathElement(clipPath[i]);
 			break;
-		case '':
+		case 'polygon':
+			this._handlePolygonElement(clipPath[i]);
+			break;
+		case 'circle' :
+			break;
+		case 'rect' :
+			break;
+		case 'ellipse' :
+			break;
+		case 'line' :
+			break;
+		case 'polyline' :
+			break;
+		case 'text' :
 			break;
 		}
 	}
@@ -127,7 +156,8 @@ exports.convertClipPath = function (clipPath) {
 
 /*
 		arguments are a string representing an svg clippath, the initial width of the box containing 
-the path and the initial height. The convert function should take all the coords specified within the path and make them proportionate to the width or height and then return the new clippath as a string.
+the path and the initial height. The convert function should take all the coords specified within
+the path and make them proportionate to the width or height and then return the new clippath as a string.
 
 Should throw an error if the input is badly formed. the user is responsible for passing a correctly formed clippath.
 
@@ -135,23 +165,20 @@ Should throw an error if the input is badly formed. the user is responsible for 
 exports.convert = function (xml, initialWidth, initialHeight) {
 	var self = this;
 	parseString(xml, function (err, result) {
-     console.log('foo',util.inspect(result, false, null));
 		forEachClipPath(result, self.convertClipPath.bind(self));
 		var builder = new xml2js.Builder();
 		var convertedXml = builder.buildObject(result);
-		console.log(convertedXml);
-	});	
-}
+	});
+};
+
 //  pinched from underscore!
 function _isObject(obj) {
-  var type = typeof obj;
-  return type === 'function' || type === 'object' && !!obj;
+	var type = typeof obj;
+	return type === 'function' || type === 'object' && !!obj;
 }
 
-
-
 function _isArray(obj) {
-  return Object.prototype.toString.call(obj) === '[object Array]';
+	return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
 function forEachClipPath(xml, callback) {
@@ -181,3 +208,15 @@ exports._forEachClipPath = forEachClipPath; // export so we can test
 exports.convertFile = function (svgFile) {
 	//  should take an svg file and convert all clip paths in it
 }
+
+fs.readFile(__dirname + '/svg-src.svg', function(err, data) {
+	parser.parseString(data, function (err, result) {
+		console.dir(result);
+		console.log('Done');
+	});
+});
+/*
+questions for tomorrow:
+1. For clip path does SVG need to be embedded or can it be in separate file?
+2. instructions for updating npm package
+*/

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Why Malebranche?</title>
+	<style>
+		body {
+			margin : 0;
+			padding : 12px;
+		}
+
+		#rect-2 {
+			width : 200px;
+			height : 300px;
+			background : green;
+		}
+
+		#rect-3 {
+			width : 200px;
+			height : 100px;
+			background : red;
+			margin : 20px;
+		}
+		#rect-4 {
+			width : 50px;
+			height : 300px;
+			background : cornflowerblue;
+		}
+
+		#rect-2, #rect-3, #rect-4 {
+			display : inline-block;
+			-webkit-clip-path : url(#svgPath2);
+			margin : 20px;
+		}
+
+
+		.container {
+		}
+		pre {
+			font-family : courier;
+		}
+		img {
+			-webkit-clip-path : url(#svgPath);
+		}
+	</style>
+</head>
+<body>
+	<svg height="0" width="0">
+		<defs>
+			<clipPath id="svgPath">
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10" d="M100 0L200 200L 0 200Z"/>
+			</clipPath>
+		</defs>
+	</svg>
+
+	<svg height="0" width="0">
+		<defs>
+			<clipPath id="svgPath2" clipPathUnits="objectBoundingBox">
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10" d="M0.5 0L1 1L 0 1Z"/>
+			</clipPath>
+		</defs>
+	</svg>
+	<div id='rect-2'></div>
+	<div id='rect-3'></div>
+	<div id='rect-4'></div>
+
+
+	<h1>Malebranche</h1>
+	<p>The clip-path css property defines a clipping region for an element hiding parts of the element outside of
+	the border of the region. The region can be defined using a shape function or by refererence to an SVG clip path.
+		It is the latter method that we are concerned with here.</p>
+	<p>According to the spec, the clippath can be either an inline SVG or an external SVG file; however external
+	SVGs are not currently supported by most browsers.</p>
+	<p>The basic concept is quite simple: an SVG clip path element defines a path which is referenced by an html element
+	via the clip-path property. The path is used to form the clipping region. In practise however, clipping paths can be
+	quite tricky to work with. Take this Codepen example. (Firstly, clip-path requires a prefix in some browsers so this wont work
+	in Chrome.Simply edit the Codepen and add the -webkit- prefix to the clip-path property name). The problem here is if you try
+	and move the element in some way, for example by adding a margin. you will find that the clipping path does not move with the element.
+	In fact if you experiment around you will find that the clipping path is anchored to the top of the page! In addition there seems no way of
+	changing the size of the clip path. In other words the element to which we are applying the clip path has to be exactly the same size and
+	in exactly the same place as the clip path. For anything other than experimental examples this is obviously not much use!</p>
+	<p>For most uses, what we actually want is a clipping region which adjusts to the size and position of our element. Happily it is
+	possible to do this. It involves setting the clipPathUnits attribute on the svg clipPath element to "objectBoundingBox". This results in the
+	coords of the path being relative to the element referencing the clipping path. There is one other thing though that we need to do and that is
+	the coords of the clipPath must be fractional numbers in the range of 0 to 1.
+		I have created a <a href='http://jsfiddle.net/Richardinho/1196o7n0/4/'>JFiddle of an element with shrink-to-fit clipping path.</a>
+		the width and height of the containing box of the clipping path resize to match that of the element its applied to. Also it is properly
+		attached to the element and will move with it. Thus we can move and resize our element and the clip path will still apply.
+	</p>
+	<p>
+		One problem is that we will often find that the coords in our clipping path are not fractional. We can edit them ourselves but if
+		it's a complicated path with bezier curves this quickly becomes unworkable. This is where Malebranche comes in. It's a node package
+		which takes an svg file with absolute coordinates and converts them into fractional ones.
+	</p>
+<pre>
+	malebranche src.svg destination.svg
+</pre>
+
+
+
+
+<p>
+</body>
+</html>

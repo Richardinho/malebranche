@@ -1,0 +1,10 @@
+//  not written yet!
+
+
+How to update NPM package.
+
+
+
+How to run tests
+// run this command (assuming that jasmine-node is installed globally)
+jasmine-node spec
