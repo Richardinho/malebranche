@@ -9,6 +9,12 @@
 			padding : 12px;
 		}
 
+		iframe {
+			width : 100%;
+			height : 600px;
+			border : solid 1px #ddd;
+		}
+
 		#rect-2 {
 			width : 200px;
 			height : 300px;
@@ -33,6 +39,11 @@
 			margin : 20px;
 		}
 
+		blockquote {
+			padding : 10px;
+			color : blue;
+			font-style : italic;
+		}
 
 		.container {
 		}
@@ -73,19 +84,44 @@
 	SVGs are not currently supported by most browsers.</p>
 	<p>The basic concept is quite simple: an SVG clip path element defines a path which is referenced by an html element
 	via the clip-path property. The path is used to form the clipping region. In practise however, clipping paths can be
-	quite tricky to work with. Take this Codepen example. (Firstly, clip-path requires a prefix in some browsers so this wont work
-	in Chrome.Simply edit the Codepen and add the -webkit- prefix to the clip-path property name). The problem here is if you try
-	and move the element in some way, for example by adding a margin. you will find that the clipping path does not move with the element.
-	In fact if you experiment around you will find that the clipping path is anchored to the top of the page! In addition there seems no way of
-	changing the size of the clip path. In other words the element to which we are applying the clip path has to be exactly the same size and
-	in exactly the same place as the clip path. For anything other than experimental examples this is obviously not much use!</p>
+	quite tricky to work with. Take the following example which was taken from Codepen. </p>
+	<iframe src='clip-path-example.html'></iframe>
+
+	<p>
+		The problem, as you will find if you attempt to move the element in any way, is that neither the position of the clipping region
+		or its size are related in any way to the element that we are trying to clip. This means that the effect will only work if our
+		element is correctly sized according to the path and positioned. Worse still, the path is anchored to the top of the page! (this is why
+		we have included the example within an iframe).
+		 For anything other than experimental examples this is obviously not much use!</p>
+	<p>
+		The problem lies in the value of the clipPathUnits attribute of the clipPath element. If we do not explicitly specify it it's default value
+		is "UserSpaceOnUse". The SVG spec says this about it:
+		</q>
+	</p>
+	<blockquote cite="https://www.w3.org/TR/SVG/masking.html#ClipPathElement">
+		If clipPathUnits="userSpaceOnUse", the contents of the ‘clipPath’ represent values in the current user coordinate
+		system in place at the time when the ‘clipPath’ element is referenced (i.e., the user coordinate system for
+		the element referencing the ‘clipPath’ element via the ‘clip-path’ property).
+	</blockquote>
+	<p>As we have seen, the user coordinate system is simply that of the browser viewport, hence why the clip path coords are unrelated to
+	either the svg element which contains them, or the html element to which we attach them.</p>
+
+	<p>
+		I am still trying to find out what is meant by the 'user coordinate system'. if position is set to 'fixed' (in Chrome) the path will
+		move with the element I have discovered. I need to devise a set of tests to establish this and do some more research.
+	</p>
 	<p>For most uses, what we actually want is a clipping region which adjusts to the size and position of our element. Happily it is
-	possible to do this. It involves setting the clipPathUnits attribute on the svg clipPath element to "objectBoundingBox". This results in the
-	coords of the path being relative to the element referencing the clipping path. There is one other thing though that we need to do and that is
-	the coords of the clipPath must be fractional numbers in the range of 0 to 1.
-		I have created a <a href='http://jsfiddle.net/Richardinho/1196o7n0/4/'>JFiddle of an element with shrink-to-fit clipping path.</a>
-		the width and height of the containing box of the clipping path resize to match that of the element its applied to. Also it is properly
-		attached to the element and will move with it. Thus we can move and resize our element and the clip path will still apply.
+	possible to do this.</p>
+
+	<p>The other possible value for clipPathUnits is "objectBoundingBox". The spec says this:</p>
+	<blockquote cite="https://www.w3.org/TR/SVG/masking.html#ClipPathElement">
+		If clipPathUnits="objectBoundingBox", then the user coordinate system for the contents of the ‘clipPath’ element is established using the bounding box of the element to which the clipping path is applied (see Object bounding box units).
+		If attribute ‘clipPathUnits’ is not specified, then the effect is as if a value of 'userSpaceOnUse' were specified.
+	</blockquote>
+
+
+	<p>This is what we want. If we move or resize the element, the clipping region will adjust accordingly. But there is one caveat: the value of the coords must be fractional and within the range 0 and 1.
+		I have created a <a href='http://jsfiddle.net/Richardinho/1196o7n0/4/'>JFiddle</a> which demonstrates this.
 	</p>
 	<p>
 		One problem is that we will often find that the coords in our clipping path are not fractional. We can edit them ourselves but if

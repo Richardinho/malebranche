@@ -20,6 +20,7 @@ function parseStringIntoJs(xml){
 			if(err) {
 				reject(err);
 			} else {
+				//console.log('foo',util.inspect(result, false, null));
 				resolve(result);
 			}
 		});
@@ -32,7 +33,14 @@ function serializeJSIntoString(obj) {
 	return builder.buildObject(obj);
 }
 
+function _arrayFromPoints(pointsString) {
+	return pointsString.split(/[ ,]+/).map(function (el) {
+		return parseInt(el, 10);
+	});
+}
+
 exports.isObject = _isObject;
 exports.isArray = _isArray;
 exports.parseStringIntoJs = parseStringIntoJs;
 exports.serializeJSIntoString = serializeJSIntoString;
+exports.arrayFromPoints = _arrayFromPoints;

@@ -1,0 +1,15 @@
+	<svg width="0" height="0" >
+		<defs>
+			<clipPath id="svgPath">
+				<circle r="45" cy="0" cx="0" />
+				<circle r="40" cy="34" cx="234" />
+				<rect x='100' y='230' width='80' height='120'/>
+				<circle r="12" cy="123" cx="98" />
+				<path d="M100 250C60 100 340 100 300 250"/>
+				<circle r="30" cy="340" cx="350" />
+				<circle r="45" cy="200" cx="367"/>
+				<polygon points="200 10 250 190 160 210" />
+				<ellipse cx="200" cy="80" rx="100" ry="50" />
+			</clipPath>
+		</defs>
+	</svg>

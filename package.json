@@ -12,7 +12,8 @@
   ],
   "author": "richard hunter <richard@richardhunter.co.uk> (richardhunter.co.uk)",
   "license": "ISC",
-  "devDependencies": {
-
+  "devDependencies": {},
+  "dependencies": {
+    "svg-path-parser": "^1.0.1"
   }
 }
