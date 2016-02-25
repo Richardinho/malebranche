@@ -1,8 +1,8 @@
 {
   "name": "malebranche",
   "version": "1.1.1",
-  "description": "nothing at present but will be cool! ",
-  "main": "index.js",
+  "description": "Converts clip path coordinates from absolute to fractional units between 0 and 1.",
+  "main": "malebranche.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,7 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "svg-path-parser": "^1.0.1"
+    "svg-path-parser": "^1.0.1",
+    "xml2js": "^0.4.16"
   }
 }

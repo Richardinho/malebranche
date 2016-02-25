@@ -12,7 +12,7 @@ var arrayFromPoints = malebrancheUtils.arrayFromPoints;
 var readFile = malebrancheIO.readFile;
 var writeFile = malebrancheIO.writeFile;
 
-var refsize = 500;
+var refsize = 960;
 
 /*
 	The idea here is to change the coords within svgObj in place.
@@ -186,11 +186,11 @@ function changeClipPathCoords(clipPath) {
 	var ellipses = clipPath[0]['ellipse'];
 	var polygons = clipPath[0]['polygon'];
 
-	circles.forEach(handleCircle.bind(null, refsize));
-	paths.forEach(handlePath.bind(null, refsize));
-	rectangles.forEach(handleRectangle.bind(null, refsize));
-	polygons.forEach(handlePolygon.bind(null, refsize));
-	ellipses.forEach(handleEllipse.bind(null, refsize));
+	if(circles) circles.forEach(handleCircle.bind(null, refsize));
+	if(paths) paths.forEach(handlePath.bind(null, refsize));
+	if(rectangles) rectangles.forEach(handleRectangle.bind(null, refsize));
+	if(polygons) polygons.forEach(handlePolygon.bind(null, refsize));
+	if(ellipses) ellipses.forEach(handleEllipse.bind(null, refsize));
 }
 
 function convertCoords(result) {

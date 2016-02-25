@@ -3,6 +3,8 @@
 var comma = ',';
 var space = '\u0020';
 
+//todo: do lots of testing with different paths
+
 function handleCommand (memo, command, index, commands) {
 	var result;
 	switch(command.code){
@@ -106,6 +108,12 @@ function handleCommand (memo, command, index, commands) {
 	case 'A':
 		break;
 	case 'a':
+		break;
+	case 'Z':
+		result = 'Z';
+		break;
+	case 'z':
+		result = 'z';
 		break;
 	default :
 		// do something else
