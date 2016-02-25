@@ -202,14 +202,16 @@ function errorHandler(error) {
 	console.log('error', error);
 }
 
-var srcFile = process.argv[2];
+exports.main = function(srcFile) {
 
-readFile(srcFile)
-	.then(parseStringIntoJs)
-	.then(convertCoords)
-	.then(serializeJSIntoString)
-	.then(writeFile)
-	.catch(errorHandler);
+	readFile(srcFile)
+		.then(parseStringIntoJs)
+		.then(convertCoords)
+		.then(serializeJSIntoString)
+		.then(writeFile)
+		.catch(errorHandler);
+
+};
 
 //  export for testing
 exports._forEachClipPath = forEachClipPath;

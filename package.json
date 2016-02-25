@@ -10,6 +10,9 @@
     "svg",
     "clip-path"
   ],
+  "bin": {
+    "malebranche": "./bin/cli.js"
+  },
   "author": "richard hunter <richard@richardhunter.co.uk> (richardhunter.co.uk)",
   "license": "ISC",
   "devDependencies": {},

@@ -1,10 +1,18 @@
-//  not written yet!
 
 
 How to update NPM package.
 
+1. commit changes
+
+2. npm version patch // to update patch number e.g 0.0.2 to 0.0.3
+
+3. npm publish  // publishes to npm package repository
 
 
 How to run tests
 // run this command (assuming that jasmine-node is installed globally)
 jasmine-node spec
+
+How to run Malebranche
+// from command line
+malebranche <srcfile>
