@@ -2,7 +2,9 @@
 <svg height="0" width="0">
   <defs>
     <clipPath id="svgPath">
-      <path d="M0.075 0.125A0.16666666666666666 0.08333333333333333 0 1 0 0.16666666666666666 0.08333333333333333Z"/>
+      <text x="0.1" y="0.5" font-size="0.4" font-family="helvetica" fill="black">
+				USA
+			</text>
     </clipPath>
   </defs>
 </svg>

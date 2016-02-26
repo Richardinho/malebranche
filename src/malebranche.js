@@ -182,6 +182,13 @@ function handleEllipse(reflength, ellipse) {
 	ellipseData.ry = parseInt(ellipseData.ry, 10) / reflength;
 }
 
+function handleText(reflength, text) {
+	var textData = text['$'];
+	textData.x = parseInt(textData.x, 10) / reflength;
+	textData.y = parseInt(textData.y, 10) / reflength;
+	textData['font-size'] = parseInt(textData['font-size'], 10) / reflength;
+}
+
 //  this will change the coords of the clip path from absolute to fractional
 function changeClipPathCoords(reflength, clipPath) {
 	var circles = clipPath[0]['circle'];
@@ -189,12 +196,14 @@ function changeClipPathCoords(reflength, clipPath) {
 	var rectangles = clipPath[0]['rect'];
 	var ellipses = clipPath[0]['ellipse'];
 	var polygons = clipPath[0]['polygon'];
+	var textArray = clipPath[0]['text'];
 
 	if(circles) circles.forEach(handleCircle.bind(null, reflength));
 	if(paths) paths.forEach(handlePath.bind(null, reflength));
 	if(rectangles) rectangles.forEach(handleRectangle.bind(null, reflength));
 	if(polygons) polygons.forEach(handlePolygon.bind(null, reflength));
 	if(ellipses) ellipses.forEach(handleEllipse.bind(null, reflength));
+	if(textArray) textArray.forEach(handleText.bind(null, reflength));
 }
 
 function convertCoords(reflength, result) {

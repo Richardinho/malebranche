@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#foo, #bar, #baz {
+		-webkit-clip-path : url(#svgPath);
+		clip-path : url(#svgPath);
+			background-image : url(http://cdn.theatlantic.com/assets/media/img/photo/2013/07/the-statue-of-liberty-127-years-at-americas-gatewa/l01_72621167/main_1200.jpg);
+			background-size : contain;
+		}
+		h2 {
+		font-family : courier;
+		}
+		#foo {
+		width : 500px;
+		height : 150px;
+		}
+		#bar {
+		width : 360px;
+		height : 300px;
+		}
+		#baz {
+		width : 400px;
+		height : 380px;
+		}
+		.container {
+		float : left;
+		border : solid 1px black;
+		margin-right : 5px;
+		margin-bottom : 5px;
+		}
+
+	</style>
+</head>
+<body>
+<a href='../index.html'>index</a>
+<h1></h1>
+<h2></h2>
+<h2></h2>
+<a href='user-space.html'>clip path example with user space</a>
+<div class='container'>
+	<div id='foo'></div>
+</div>
+<div class='container'>
+	<div id='bar'></div>
+</div>
+<div class='container'>
+	<div id='baz'></div>
+</div>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg width="0" height="0">
+	<defs>
+		<clipPath id="svgPath" clipPathUnits='objectBoundingBox'>
+			<text x="0.1" y="0.5" font-size="0.4" font-family="helvetica" fill="black">
+				USA
+			</text>
+		</clipPath>
+	</defs>
+</svg>
+</body>
+</html>
