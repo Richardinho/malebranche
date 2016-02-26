@@ -1,10 +1,8 @@
 var xml2js = require('xml2js'),
     util = require('util');
 
-
 var parser = new xml2js.Parser();
 
-//  pinched from underscore!
 function _isObject(obj) {
 	var type = typeof obj;
 	return type === 'function' || type === 'object' && !!obj;
@@ -33,14 +31,9 @@ function serializeJSIntoString(obj) {
 	return builder.buildObject(obj);
 }
 
-function _arrayFromPoints(pointsString) {
-	return pointsString.split(/[ ,]+/).map(function (el) {
-		return parseInt(el, 10);
-	});
-}
+
 
 exports.isObject = _isObject;
 exports.isArray = _isArray;
 exports.parseStringIntoJs = parseStringIntoJs;
 exports.serializeJSIntoString = serializeJSIntoString;
-exports.arrayFromPoints = _arrayFromPoints;

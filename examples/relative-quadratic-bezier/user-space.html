@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#foo {
+			width : 800px;
+			height : 600px;
+			background : red;
+			-webkit-clip-path : url(#svgPath);
+			clip-path : url(#svgPath);
+		}
+	</style>
+</head>
+<body>
+<svg height="0" width="0">
+	<defs>
+		<clipPath id="svgPath">
+			<path fill="none"
+						stroke="#f7c562"
+						stroke-width="1"
+						d="M100,100 q100,50 100,90 t40,50z" />
+		</clipPath>
+	</defs>
+</svg>
+
+<div id='foo'></div>
+<a href='object-bounding-box.html'>clip path example with object bounding box space</a>
+
+</body>
+</html>

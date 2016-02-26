@@ -1,5 +1,5 @@
 describe('read-file tests', function () {
-	var malebranche = require('../malebranche.js');
+	var malebranche = require('../src/malebranche.js');
 	describe('_forEachClipPath()', function () {
 		var callback;
 		var srcSVGObj =

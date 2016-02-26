@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#foo, #bar, #baz {
+		-webkit-clip-path : url(#svgPath);
+		clip-path : url(#svgPath);
+		}
+		h2 {
+		font-family : courier;
+		}
+		#foo {
+		width : 250px;
+		height : 150px;
+		background : red;
+		}
+		#bar {
+		width : 160px;
+		height : 300px;
+		background : green;
+		}
+		#baz {
+		width : 200px;
+		height : 380px;
+		background : blue;
+		}
+		.container {
+		float : left;
+		border : solid 1px black;
+		margin-right : 5px;
+		margin-bottom : 5px;
+		}
+	</style>
+</head>
+<body>
+<a href='../index.html'>index</a>
+<h1>Absolute elliptical arc</h1>
+<h2>M 45,75 A100,50 0 1,0 100,50z</h2>
+<h2>M0.075 0.125A0.16666666666666666 0.08333333333333333 0 1 0 0.16666666666666666 0.08333333333333333Z</h2>
+<a href='user-space.html'>clip path example with user space</a>
+<div class='container'>
+	<div id='foo'></div>
+</div>
+<div class='container'>
+	<div id='bar'></div>
+</div>
+<div class='container'>
+	<div id='baz'></div>
+</div>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg width="0" height="0">
+	<defs>
+		<clipPath id="svgPath" clipPathUnits='objectBoundingBox'>
+			<path fill="none" stroke="#f7c562" stroke-width="1" d="M0.075 0.125A0.16666666666666666 0.08333333333333333 0 1 0 0.16666666666666666 0.08333333333333333Z"/>
+		</clipPath>
+	</defs>
+</svg>
+</body>
+</html>

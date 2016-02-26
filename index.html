@@ -45,38 +45,43 @@
 			font-style : italic;
 		}
 
-		.container {
-		}
+
 		pre {
 			font-family : courier;
 		}
 		img {
-			-webkit-clip-path : url(#svgPath);
+			-webkit-clip-path : url(#svg-blob-shape);
+			        clip-path : url(#svg-blob-shape);
+		}
+
+		.example {
+			display : inline-block;
+		}
+		.alpha {
+			width : 100px; height : 100px;
+
+		}
+		.beta {
+			width : 250px;
+		}
+		.gamma {
+			width : 150px;
+			height : 250px;
+		}
+		.delta {
+			width : 400px;
+		}
+		.container {
+			border : solid 1px #ddd;
+			margin-right : 20px;
+			display : inline-block;
 		}
 	</style>
 </head>
 <body>
-	<svg height="0" width="0">
-		<defs>
-			<clipPath id="svgPath">
-				<path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10" d="M100 0L200 200L 0 200Z"/>
-			</clipPath>
-		</defs>
-	</svg>
 
-	<svg height="0" width="0">
-		<defs>
-			<clipPath id="svgPath2" clipPathUnits="objectBoundingBox">
-				<path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10" d="M0.5 0L1 1L 0 1Z"/>
-			</clipPath>
-		</defs>
-	</svg>
-	<div id='rect-2'></div>
-	<div id='rect-3'></div>
-	<div id='rect-4'></div>
-
-
-	<h1>Malebranche</h1>
+<div class='article-7'>
+	<h3>The clip-path property</h3>
 	<p>The clip-path css property defines a clipping region for an element hiding parts of the element outside of
 	the border of the region. The region can be defined using a shape function or by refererence to an SVG clip path.
 		It is the latter method that we are concerned with here.</p>
@@ -85,7 +90,7 @@
 	<p>The basic concept is quite simple: an SVG clip path element defines a path which is referenced by an html element
 	via the clip-path property. The path is used to form the clipping region. In practise however, clipping paths can be
 	quite tricky to work with. Take the following example which was taken from Codepen. </p>
-	<iframe src='clip-path-example.html'></iframe>
+	<iframe src='/clip-path-example.html'></iframe>
 
 	<p>
 		The problem, as you will find if you attempt to move the element in any way, is that neither the position of the clipping region
@@ -94,59 +99,70 @@
 		we have included the example within an iframe).
 		 For anything other than experimental examples this is obviously not much use!</p>
 	<p>
-		The problem lies in the value of the clipPathUnits attribute of the clipPath element. If we do not explicitly specify it it's default value
+		The problem lies in the value of the clipPathUnits attribute of the clipPath element. If we do not explicitly specify it, it's default value
 		is "UserSpaceOnUse". The SVG spec says this about it:
-		</q>
 	</p>
 	<blockquote cite="https://www.w3.org/TR/SVG/masking.html#ClipPathElement">
 		If clipPathUnits="userSpaceOnUse", the contents of the ‘clipPath’ represent values in the current user coordinate
 		system in place at the time when the ‘clipPath’ element is referenced (i.e., the user coordinate system for
 		the element referencing the ‘clipPath’ element via the ‘clip-path’ property).
 	</blockquote>
-	<p>As we have seen, the user coordinate system is simply that of the browser viewport, hence why the clip path coords are unrelated to
-	either the svg element which contains them, or the html element to which we attach them.</p>
-
 	<p>
-		I am still trying to find out what is meant by the 'user coordinate system'. if position is set to 'fixed' (in Chrome) the path will
-		move with the element I have discovered. I need to devise a set of tests to establish this and do some more research.
+		The term 'user coordinate system' is a little ambiguous to me but it turns out that this is normally the coordinate space of the document itself.
+		If the referencing element is contained by one with fixed positioning, the clip path coords will be relative to the positioned element.
+		If that element is positioned absolutely however, Firefox and Chrome behave differently. In Firefox the clip path will be relative to
+		the positioned element, but in Chrome the clip path will be relative to the document. In spite of these inconsistencies, I don't think
+		the concept of 'userSpaceOnUse' is a useful one. Even Sarah Souiedan in her article on clip path resorted to
+		using images for it rather than live examples!
 	</p>
-	<p>For most uses, what we actually want is a clipping region which adjusts to the size and position of our element. Happily it is
-	possible to do this.</p>
 
-	<p>The other possible value for clipPathUnits is "objectBoundingBox". The spec says this:</p>
+
+	<p>What we actually probably want is a clipping region which adjusts to the size and position of the referencing element and happily it is
+	possible to do this using the other possible value for clipPathUnits, 'objectBoundingBox'. The spec says this about it:</p>
 	<blockquote cite="https://www.w3.org/TR/SVG/masking.html#ClipPathElement">
 		If clipPathUnits="objectBoundingBox", then the user coordinate system for the contents of the ‘clipPath’ element is established using the bounding box of the element to which the clipping path is applied (see Object bounding box units).
 		If attribute ‘clipPathUnits’ is not specified, then the effect is as if a value of 'userSpaceOnUse' were specified.
 	</blockquote>
 
 
-	<p>This is what we want. If we move or resize the element, the clipping region will adjust accordingly. But there is one caveat: the value of the coords must be fractional and within the range 0 and 1.
+	<p>This seems much more useful. If we move or resize the element, the clipping region will adjust accordingly. But there is one caveat:
+		the value of the coords must be fractional and within the range 0 and 1.
 		I have created a <a href='http://jsfiddle.net/Richardinho/1196o7n0/4/'>JFiddle</a> which demonstrates this.
 	</p>
+	<h3>Malebranche</h3>
 	<p>
-		One problem is that we will often find that the coords in our clipping path are not fractional. We can edit them ourselves but if
-		it's a complicated path with bezier curves this quickly becomes unworkable. This is where Malebranche comes in. It's a node package
-		which takes an svg file with absolute coordinates and converts them into fractional ones.
+		we will often find that the coords in the clipping path that we want to use are not fractional. We can edit them ourselves but if
+		it's a complicated path involving bezier curves this quickly becomes unworkable. This is where Malebranche comes in. It's a node package
+		which takes an svg file containing clip paths with absolute coordinates and converts them into fractional ones.
+		See below for a link to its npm webpage.
 	</p>
-<pre>
-	malebranche src.svg destination.svg
-</pre>
+	<p>The basic workflow is that you take an svg file which contains clip path elements and feed the path to this as an argument to malebranche
+	along with a reference length and malebranche will generate a new version of the file with all clip path units transformed into fractional ones.
+	Of course, as for most browsers it is still necessary to use inline svg some copy and pasting is still required. Malebranche is still also
+	very new and I am still working on and it doesn't support just yet some of the more complicated possible clip paths but it is a work in progress and of course
+	as an open source project we welcome pull requests!</p>
+	<p>Here are some examples of clipped images using a clip path transformed by Malebranche. Note how when we resize
+	the element, the clip path adjusts accordingly. Even when we alter the proportions of the element, the clip path
+	changes with them. I think it's fairly obvious why fractional coords are preferable to absolute ones.</p>
 
-	to do tomorrow: experiment with clipPathUnits and try and work out what the user coordinate system is.
-	Also understand fully the different types of bezier curves.
+	<div class='img-container'><img class="clipped-img alpha" src="https://pixabay.com/static/uploads/photo/2016/01/17/04/29/rain-drops-1144448_960_720.jpg" alt="Rain Drops"></div>
+	<div class='img-container'><img class="clipped-img beta" src="https://pixabay.com/static/uploads/photo/2016/01/17/04/29/rain-drops-1144448_960_720.jpg" alt="Rain Drops"></div>
+	<div class='img-container'><img class="clipped-img gamma" src="https://pixabay.com/static/uploads/photo/2016/01/17/04/29/rain-drops-1144448_960_720.jpg" alt="Rain Drops"></div>
+	<div class='img-container'><img class="clipped-img delta" src="https://pixabay.com/static/uploads/photo/2016/01/17/04/29/rain-drops-1144448_960_720.jpg" alt="Rain Drops"></div>
+	<h3>References</h3>
+	<ul>
+		<li><a href='http://caniuse.com/#feat=css-clip-path'>support for clip-path property</a></li>
+		<li><a href='https://sarasoueidan.com/blog/css-svg-clipping/'>clip path article by Sara Souedan</a></li>
+		<li><a href='https://www.npmjs.com/package/malebranche'>Malebranche</a></li>
+	</ul>
 
-	Create a few examples of transformed paths if possible. Maybe play around with text.
-
-	Also, write up instructions for managing npm packages, update this package!
-
-	Read again Sarah Souiedan's article on the viewbox
-
-	Brentano: integrate aria into this.
-
-	SelectionBox : play around with knockout. See if it works with templates. Try Angular with is too.
-
-
-
-<p>
+	<svg width="0" height="0">
+		<defs>
+			<clipPath id="svg-blob-shape" clipPathUnits='objectBoundingBox'>
+				<path fill="#FFFFFF" stroke="#000000" stroke-width="1.5794" stroke-miterlimit="10" d="M0.26875 0.125375c0.12225 -0.04075 0.113125 -0.08987500000000001 0.42 -0.09699999999999999c0.1155 -0.002625 0.122625 0.102 0.15225 0.14550000000000002c0.12712500000000002 0.187375 0.066875 0.19487500000000002 0.018375 0.2225c-0.12050000000000001 0.06862499999999999 0.006750000000000001 0.33625 -0.32125 0.143875c-0.07125 -0.041875 -0.25375 0.057874999999999996 -0.329625 0.025125c-0.041875 -0.018125 -0.165625 -0.056875 -0.11875 -0.138875C0.15737500000000001 0.30824999999999997 0.12325 0.173875 0.26875 0.125375Z"/>
+			</clipPath>
+		</defs>
+	</svg>
+	</div>
 </body>
 </html>

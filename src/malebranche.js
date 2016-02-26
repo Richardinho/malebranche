@@ -2,17 +2,22 @@
 var malebrancheUtils = require('./malebranche-utils.js'),
     malebrancheIO = require('./malebranche-io.js'),
     parsePath  = require('svg-path-parser');
-    pathBuilder = require('./svg-path-builder.js');
+    pathBuilder = require('./svg-path-builder.js'),
+    pointsParser = require('./points-parser.js');
 
 var _isArray = malebrancheUtils.isArray;
 var _isObject = malebrancheUtils.isObject;
 var parseStringIntoJs = malebrancheUtils.parseStringIntoJs;
 var serializeJSIntoString = malebrancheUtils.serializeJSIntoString;
-var arrayFromPoints = malebrancheUtils.arrayFromPoints;
 var readFile = malebrancheIO.readFile;
 var writeFile = malebrancheIO.writeFile;
+var arrayFromPoints = pointsParser.arrayFromPoints;
 
-
+/*
+	A ‘clipPath’ element can contain ‘path’ elements, ‘text’ elements, basic shapes (such as ‘circle’) or
+	a ‘use’ element. If a ‘use’ element is a child of a ‘clipPath’ element, it must directly reference ‘path’,
+	‘text’ or basic shape elements. Indirect references are an error (see Error processing).
+*/
 /*
 	The idea here is to change the coords within svgObj in place.
 */
@@ -48,6 +53,8 @@ function handleCircle(reflength, circle) {
 	circleData.cx = parseInt(circleData.cx, 10) / reflength;
 };
 
+//  Add support for text
+//  add support for signed numbers and exponentials
 function handleCommand (reflength, command) {
 	switch(command.code){
 	case 'M':
@@ -131,14 +138,12 @@ function handleCommand (reflength, command) {
 		command.y = command.y / reflength;
 		command.rx = command.rx / reflength;
 		command.ry = command.ry / reflength;
-		// do I need to do x-axis-rotation?
 		break;
 	case 'a':
 		command.x = command.x / reflength;
 		command.y = command.y / reflength;
 		command.rx = command.rx / reflength;
 		command.ry = command.ry / reflength;
-		// do I need to do x-axis-rotation?
 		break;
 	default :
 		// do something else

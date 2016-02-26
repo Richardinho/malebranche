@@ -1,9 +1,10 @@
 /* takes commands and builds into svg path string */
 
-var comma = ',';
 var space = '\u0020';
 
 //todo: do lots of testing with different paths
+// make a collection of different paths
+//  study how svg-path-parser breaks up paths.
 
 function handleCommand (memo, command, index, commands) {
 	var result;
@@ -104,10 +105,19 @@ function handleCommand (memo, command, index, commands) {
 			result = 't' + space + command.x + space + command.y;
 		}
 		break;
-		// leave this for now!
 	case 'A':
+		if(index > 0 && commands[index-1].code === 'A') {
+			result = space + command.rx + space + command.ry + space + command.xAxisRotation + space + (+command.largeArc) + space + (+command.sweep) + space + command.x + space + command.y;
+		} else {
+			result = 'A' + command.rx + space + command.ry + space + command.xAxisRotation + space + (+command.largeArc) + space + (+command.sweep) + space + command.x + space + command.y;
+		}
 		break;
 	case 'a':
+		if(index > 0 && commands[index-1].code === 'a') {
+			result = space + command.rx + space + command.ry + space + command.xAxisRotation + space + (+command.largeArc) + space + (+command.sweep) + space + command.x + space + command.y;
+		} else {
+			result = 'a' + command.rx + space + command.ry + space + command.xAxisRotation + space + (+command.largeArc) + space + (+command.sweep) + space + command.x + space + command.y;
+		}
 		break;
 	case 'Z':
 		result = 'Z';

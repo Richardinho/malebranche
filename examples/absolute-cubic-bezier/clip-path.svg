@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg height="0" width="0">
+	<defs>
+		<clipPath id="svgPath">
+			<path d="M100,200 C100,100 250,100 250,200l-100 100z" />
+		</clipPath>
+	</defs>
+</svg>

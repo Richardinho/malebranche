@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#foo, #bar, #baz {
+		-webkit-clip-path : url(#svgPath);
+		clip-path : url(#svgPath);
+		}
+		h2 {
+		font-family : courier;
+		}
+		#foo {
+		width : 250px;
+		height : 150px;
+		background : red;
+		}
+		#bar {
+		width : 160px;
+		height : 300px;
+		background : green;
+		}
+		#baz {
+		width : 200px;
+		height : 380px;
+		background : blue;
+		}
+		.container {
+		float : left;
+		border : solid 1px black;
+		margin-right : 5px;
+		margin-bottom : 5px;
+		}
+	</style>
+</head>
+<body>
+<a href='../index.html'>index</a>
+<h1>relative smooth curve bezier</h1>
+<h2>M100,200 c100,100 250,100 250,200s100 45 123 45l-100 100z</h2>
+<h2>M0.125 0.25c0.125 0.125 0.3125 0.125 0.3125 0.25s 0.125 0.05625 0.15375 0.05625l-0.125 0.125Z</h2>
+<a href='user-space.html'>clip path example with user space</a>
+<div class='container'>
+	<div id='foo'></div>
+</div>
+<div class='container'>
+	<div id='bar'></div>
+</div>
+<div class='container'>
+	<div id='baz'></div>
+</div>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg width="0" height="0">
+	<defs>
+		<clipPath id="svgPath" clipPathUnits='objectBoundingBox'>
+			<path fill="none" stroke="#f7c562" stroke-width="1" d="M0.125 0.25c0.125 0.125 0.3125 0.125 0.3125 0.25s 0.125 0.05625 0.15375 0.05625l-0.125 0.125Z"/>
+		</clipPath>
+	</defs>
+</svg>
+</body>
+</html>

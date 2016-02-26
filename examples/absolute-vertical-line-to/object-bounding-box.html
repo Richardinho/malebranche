@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<style>
+		#foo, #bar, #baz {
+		-webkit-clip-path : url(#svgPath);
+		clip-path : url(#svgPath);
+		}
+		h2 {
+		font-family : courier;
+		}
+		#foo {
+		width : 250px;
+		height : 150px;
+		background : red;
+		}
+		#bar {
+		width : 160px;
+		height : 300px;
+		background : green;
+		}
+		#baz {
+		width : 200px;
+		height : 380px;
+		background : blue;
+		}
+		.container {
+		float : left;
+		border : solid 1px black;
+		margin-right : 5px;
+		margin-bottom : 5px;
+		}
+	</style>
+</head>
+<body>
+<a href='../index.html'>index</a>
+<h1>path with absolute vertical line-to command</h1>
+<h2>M24 130l400 100 V 30 30 30L0 400z</h2>
+<h2>M0.03 0.1625l0.5 0.125V0.0375 0.0375 0.0375L0 0.5Z</h2>
+<a href='user-space.html'>clip path example with user space</a>
+<div class='container'>
+	<div id='foo'></div>
+</div>
+<div class='container'>
+	<div id='bar'></div>
+</div>
+<div class='container'>
+	<div id='baz'></div>
+</div>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svg width="0" height="0">
+	<defs>
+		<clipPath id="svgPath" clipPathUnits='objectBoundingBox'>
+			<path fill="none" stroke="#f7c562" stroke-width="1" d="M0.03 0.1625l0.5 0.125V0.0375 0.0375 0.0375L0 0.5Z"/>
+		</clipPath>
+	</defs>
+</svg>
+</body>
+</html>

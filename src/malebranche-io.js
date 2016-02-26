@@ -2,7 +2,7 @@ var fs = require('fs')
 
 function readFile(srcFile) {
 	return new Promise(function(resolve, reject){
-		fs.readFile(__dirname + '/' + srcFile, function(err, data) {
+		fs.readFile(__dirname + '/../' + srcFile, function(err, data) {
 			if(err) {
 				reject(err);
 			} else {
@@ -14,7 +14,7 @@ function readFile(srcFile) {
 
 function writeFile(contents) {
 	return new Promise(function(resolve, reject){
-		fs.writeFile(__dirname + '/destination.svg', contents, function(err) {
+		fs.writeFile(__dirname + '/../destination.svg', contents, function(err) {
 			if(err) {
 				reject(err);
 			} else {
