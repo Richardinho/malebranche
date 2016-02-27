@@ -15,6 +15,16 @@ due to some of the details of the SVG grammar. The issues involved are discussed
 ```sh
 $ npm install --save malebranche
 ```
+##  Usage
+
+```sh
+var malebranche = require('malebranche');
+
+var file = __dirname + '/test.svg';
+malebranche.main(file, 800);
+
+```sh
+
 
 Malebranche depends on [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/).
 

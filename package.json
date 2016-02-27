@@ -2,7 +2,7 @@
   "name": "malebranche",
   "version": "1.4.1",
   "description": "Converts clip path coordinates from absolute to fractional units between 0 and 1.",
-  "main": "malebranche.js",
+  "main": "src/malebranche.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
