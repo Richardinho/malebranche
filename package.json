@@ -1,6 +1,6 @@
 {
   "name": "malebranche",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Converts clip path coordinates from absolute to fractional units between 0 and 1.",
   "main": "src/malebranche.js",
   "scripts": {
