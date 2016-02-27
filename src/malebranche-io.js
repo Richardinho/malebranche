@@ -2,7 +2,7 @@ var fs = require('fs')
 
 function readFile(srcFile) {
 	return new Promise(function(resolve, reject){
-		fs.readFile(__dirname + '/../' + srcFile, function(err, data) {
+		fs.readFile(srcFile, function(err, data) {
 			if(err) {
 				reject(err);
 			} else {
