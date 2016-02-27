@@ -14,7 +14,7 @@ function readFile(srcFile) {
 
 function writeFile(contents) {
 	return new Promise(function(resolve, reject){
-		fs.writeFile(__dirname + '/../destination.svg', contents, function(err) {
+		fs.writeFile('destination.svg', contents, function(err) {
 			if(err) {
 				reject(err);
 			} else {

@@ -18,12 +18,13 @@ $ npm install --save malebranche
 ##  Usage
 
 ```sh
+
 var malebranche = require('malebranche');
 
-var file = __dirname + '/test.svg';
-malebranche.main(file, 800);
-```
+malebranche.main('my-file.svg', 800);
 
+```
+A file called 'destination.svg' should appear in the folder that this file was run.
 
 Malebranche depends on [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/).
 
