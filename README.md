@@ -22,8 +22,7 @@ var malebranche = require('malebranche');
 
 var file = __dirname + '/test.svg';
 malebranche.main(file, 800);
-
-```sh
+```
 
 
 Malebranche depends on [Node.js](http://nodejs.org/) and [npm](http://npmjs.org/).
