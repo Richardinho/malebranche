@@ -43,4 +43,14 @@ describe('points-parser spec', function () {
 			expect(pathArray).toEqual([200, 345, 822, 45, 12, 45]);
 		});
 	});
+
+	describe('when there is a space at the end of the string', function () {
+		beforeEach(function () {
+			var pathString = '200,345, 822 45,12 45 ';
+			pathArray = arrayFromPoints(pathString);
+		});
+		it('should return array of points', function () {
+			expect(pathArray).toEqual([200, 345, 822, 45, 12, 45]);
+		});
+	});
 });

@@ -1,5 +1,5 @@
 function arrayFromPoints(pointsString) {
-	return pointsString.split(/[ ,]+/).map(function (el) {
+	return pointsString.trim().split(/[ ,]+/).map(function (el) {
 		return parseInt(el, 10);
 	});
 }

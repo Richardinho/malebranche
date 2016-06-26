@@ -197,6 +197,7 @@ function changeClipPathCoords(reflength, clipPath) {
 	var ellipses = clipPath[0]['ellipse'];
 	var polygons = clipPath[0]['polygon'];
 	var textArray = clipPath[0]['text'];
+	//  todo: handle 'use' element which references other elements within the object.
 
 	if(circles) circles.forEach(handleCircle.bind(null, reflength));
 	if(paths) paths.forEach(handlePath.bind(null, reflength));
