@@ -1,19 +1,33 @@
 #! /usr/bin/env node
 
-var malebranche = require('../src/malebranche.js');
+let malebranche = require('../src/malebranche.js');
+let help = require('./command-line-usage.js');
 
-var srcFile = process.argv[2];
-var referenceLength = process.argv[3];
+const commandLineArgs = require('command-line-args')
 
-if(srcFile && referenceLength) {
-	malebranche.main(srcFile, referenceLength);
+const optionDefinitions = [
+  { name : 'name',    type : String, alias: 'n' },
+  { name : 'src',     type : String, multiple: false, defaultOption: true },
+  { name : 'width',   type : Number, alias : 'w' },
+  { name : 'height',  type : Number, alias : 'h' },
+  { name : 'xmin',    type : Number },
+  { name : 'ymin',    type : Number },
+  { name : 'help' }
+]
+
+const options = commandLineArgs(optionDefinitions)
+
+const srcFile = options.src;
+const name = options.name;
+const hReferenceLength = options.width;
+const vReferenceLength = options.height;
+const xMin = parseInt(options.xmin, 10) || 0;
+const yMin = parseInt(options.ymin, 10) || 0;
+
+if (srcFile && name && hReferenceLength & vReferenceLength) {
+	malebranche.main(srcFile, name, hReferenceLength, vReferenceLength, xMin, yMin);
 } else {
-	throw {
-		message : 'you must supply a source file and a reference length'
-	};
+	console.log(help);
 }
 
-/*
-todo
-	allow user to specify destination file, allow file to reside in folder where Malebranche is being run
-*/
+

@@ -7,10 +7,10 @@ describe('points-parser spec', function () {
 	describe('when points are space separated', function () {
 		beforeEach(function () {
 			var pathString = '200 345 822 45 12 45 67';
-	    pathArray = arrayFromPoints(pathString);
+	    	pathArray = arrayFromPoints(pathString);
 		});
 		it('should return array of points', function () {
-	    expect(pathArray).toEqual([200, 345, 822, 45, 12, 45, 67]);
+	    	expect(pathArray).toEqual([200, 345, 822, 45, 12, 45, 67]);
 		});
 	});
 

@@ -4,7 +4,6 @@
   "description": "Converts clip path coordinates from absolute to fractional units between 0 and 1.",
   "main": "src/malebranche.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "svg",
@@ -17,6 +16,8 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
+    "command-line-args": "^4.0.4",
+    "command-line-usage": "^4.0.0",
     "svg-path-parser": "^1.0.1",
     "xml2js": "^0.4.16"
   }

@@ -12,9 +12,9 @@ function readFile(srcFile) {
 	});
 }
 
-function writeFile(contents) {
+function writeFile(name, contents) {
 	return new Promise(function(resolve, reject){
-		fs.writeFile('destination.svg', contents, function(err) {
+		fs.writeFile(name || 'destination.svg', contents, function(err) {
 			if(err) {
 				reject(err);
 			} else {
