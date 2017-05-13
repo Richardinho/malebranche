@@ -71,7 +71,6 @@ And this is the resulting effect. As you can see, the clip path now scales and s
 
 ##  Usage
 
-
 ### Install
 
 ```sh
