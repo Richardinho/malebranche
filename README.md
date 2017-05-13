@@ -36,11 +36,11 @@ This results in the following.
 
 You can see in the first row a series of pink squares of different dimensions. 
 The second row repeats the same sequence of elements but with a clip path applied. 
-This demonstrates that the clip path remains the same size regardless of the element to which it is applied.
+Observe that the clip path remains the same size regardless of the element to which it is applied.
 
-But what if we want the clip path to adjust, scaling and stretching, to fit the HTML element?
+But what if we want the clip path to be adustable, scaling and stretching, to fit the HTML element?
 
-In fact, this is possible: first need to add a `clipPathUnits` attribute to the original `clip-path` element and set its value to 'objectBoundingBox'. 
+In fact, this is possible: first we add a `clipPathUnits` attribute to the original `clip-path` element and set its value to 'objectBoundingBox'.
 Next, we need to change the coordinates of the clip path to fractional values; that is to say, values between 0 and 1. 
 For example, if the html element is 100px wide, then an x coordinate of value 0.5 will be located 50px from the left edge of the element.
 
