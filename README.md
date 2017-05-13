@@ -17,9 +17,7 @@ Here is a simple example. A CSS rule set defines a list of declarations which in
         clip-path : url(#clock);
     }
 ```
-
 The SVG clip path definition follows. Note the `id` property of the `clipPath` element which is referenced by the `clip-path` property.
-
 
 ```
     <div class="foo"></div>
@@ -33,18 +31,41 @@ The SVG clip path definition follows. Note the `id` property of the `clipPath` e
     </svg>
 ```
 
-See the demo [here](https://richardinho.github.io/malebranche-tests/test2/). This looks reasonably good, but the dimensions of the HTML element has no relation to the clip path. The applied clip path simply uses the coordinates as they are in the original SVG element and translates them according to the current position of the HTML element. Resizing the HTML element will have effect at all on the clip path. This is annoying if you want the clip path to fit to the dimensions of the HTML element and scale and resize as it changes. 
+![example 1](https://richardinho.github.io/malebranche-tests/test2/images/example-1.png)
+[live demo](https://richardinho.github.io/malebranche-tests/test2/)
 
-Fortunately, this is possible to do. An attribute on the clip path element itself determines how the clip path is applied to a referencing element. By default, it is set to 'userspaceonuse', which means, as we have already observed, that the clip path will use the coordinates of the clip path as they are, but translate them in accordance with the HTML element's position. Another value this attribute can be set to is 'objectBoundingBox'. This means that the path coordinates will be in relation to the size of the referencing html element. However, it is not simply a case of adding the attribute to the clip path element. This will not work. It is also necessary to change the coordinates of the path from absolute ones to relative ones, that is values between 0 and 1. Thus, if an element has a width of 50px, an x coordinate with the value of .5 will be positioned 25 pixels (halfway) from the left edge of the element.
+The image shows, below, a pink square with a clip path applied. Above it, is a pink square of the same dimensions without a clip path. The applied clip path has coordinates that are equal to the coordinates of the original SVG clip path, translated by x and y values of the html element to which the path is applied. In other words, the dimensions of the element have effect at all on the coordinates of the clip path.
 
-A tool for converting svg clip path coordinates from absolute units to fractional units in a range between 0 and 1.
-The purpose of this is to be able to use clip paths with clip path units set relative to the referencing element rather
-than to user space (the browser viewport) which isn't very useful.
+Clearly, we might wish, in some cases, for the clip path to stretch and scale to fit the dimensions of our html element. This, however, is possible.
 
-The clip path css property offers huge potential for creating clip regions but can be difficult to work with
-due to some of the details of the SVG grammar. The issues involved are discussed in this article:
-* [Discussion on clip path](http://blog.richardhunter.co.uk/index.php/7)
+We need to add a `clipPathUnits` attribute to the original `clip-path` element and set its value to 'objectBoundingBox'. Next, we need to change the coordinates of the clip path to fractional values. That is to say, values between 0 and 1. For example, if the html element is 100px wide, then an x coordinate of value 0.5 will be located 50px from the left edge of the element.
 
+Malebranche is a Node based utility we use for converting from decimal to fractional coordinates. It can be used programatically or from the command line. You supply it with values which the x and y coordinates are calculated relative to. Details on usage are provided below.
+
+The end result will be a path with the translated coordinates.
+
+```
+    <path d="M0.5 0c-0.27615625 0 -0.5 0.22384375 -0.5 0.5s 0.22384375 0.5 0.5 0.5 0.5 -0.22384375 0.5 -0.5 -0.22384375 -0.5 -0.5 -0.5ZM0.6433125 0.7316875l-0.2058125 -0.2058125v-0.275875h0.125v0.224125l0.1691875 0.1691875 -0.08840625 0.08840625Z"/>
+
+```
+
+After copying this path into back into the original file, replacing the old path, we end up with this.
+
+
+```
+    <svg height="0" width="0">
+        <defs>
+            <clipPath id="clock" clipPathUnits="objectBoundingBox">
+                <path d="M0.5 0c-0.27615625 0 -0.5 0.22384375 -0.5 0.5s 0.22384375 0.5 0.5 0.5 0.5 -0.22384375 0.5 -0.5 -0.22384375 -0.5 -0.5 -0.5ZM0.6433125 0.7316875l-0.2058125 -0.2058125v-0.275875h0.125v0.224125l0.1691875 0.1691875 -0.08840625 0.08840625Z"/>
+            </clipPath>
+        </defs>
+    </svg>
+
+```
+And this is the resulting effect. As you can see, the clip path now scales and stretches to fit the html element.
+
+![example 2](https://richardinho.github.io/malebranche-tests/test2/images/example-2.png)
+[live demo](https://richardinho.github.io/malebranche-tests/test2/index2.html)
 ---
 
 ## Install
