@@ -89,6 +89,10 @@ malebranche --width 800 --height 600 --name generated.svg --src ./source.svg
 ```
 See help files for full list of options
 
+### Note on source file
+Malebranche operates on xml files. 
+The file doesn't need to include any svg at all (though obviously it doesn't do much without it!), but it does have to be valid xml.
+
 ## License
 
 Copyright (c) 2016 Richard Hunter
