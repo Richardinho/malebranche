@@ -58,14 +58,12 @@ $ npm install --save malebranche
 var malebranche = require('malebranche');
 
 malebranche.main('my-file.svg', 800);
-
 ```
 A file called 'destination.svg' should appear in the folder that this file was run.
 
 ###  Command line
 ```
 malebranche --width 800 --height 600 --name generated.svg --src ./source.svg
-
 ```
 See help files for full list of options
 
