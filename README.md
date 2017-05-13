@@ -68,13 +68,15 @@ And this is the resulting effect. As you can see, the clip path now scales and s
 [live demo](https://richardinho.github.io/malebranche-tests/test2/index2.html)
 ---
 
-## Install
+
+##  Usage
+
+
+### Install
 
 ```sh
 $ npm install --save malebranche
 ```
-##  Usage
-
 ### Programmatic
 
 ```
