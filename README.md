@@ -1,4 +1,6 @@
-# Malebranche - node utility for converting clip path coordinates from absolute to fractional
+# Malebranche
+
+A node utility for converting clip path coordinates from absolute to fractional
 
 ### Introduction
 The CSS clip-path property permits svg clip paths to be used as clip paths for html elements,
