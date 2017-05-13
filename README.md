@@ -50,7 +50,8 @@ Here is the answer.
 Malebranche is a Node based utility which converts coordinates of a clip path from decimal to fractional values. 
 It can be used from the command line or programmatically in a Node script. 
 Details on usage are provided below. 
-You supply it with a source file and width and height values to calculate the coordinates relative to and it  generates a file which contains the converted path.
+You supply it with a source svg file with width and height values to calculate the coordinates relative to.
+Malebranche copies the content of the src file to the destination file after searching  through it for all clipPath elements and then converting coordinates with decimal values to fractional ones.
 
 We can now create clip paths that scale and stretch correctly.
 
@@ -69,11 +70,18 @@ $ npm install --save malebranche
 ### Programmatic
 
 ```
-var malebranche = require('malebranche');
+    let malebranche = require('malebranche');
 
-malebranche.main('my-file.svg', 800);
+    let srcFile = 'lab-clip-path.svg';
+    let name = 'generated-svg.svg';  //  name of generated file
+    let hRefLength = 32;
+    let vRefLength = 32;
+    let xmin = 0; //  xmin and ymin arguments allow the clip path to be offset. Normally, these should both be 0
+    let ymin = 0;
+
+    malebranche.main(srcFile, name, hRefLength, vRefLength, xmin, ymin);
 ```
-A file called 'destination.svg' should appear in the folder that this file was run.
+A file called 'generated-svg.svg' should appear in the folder that this file was run.
 
 ###  Command line
 ```

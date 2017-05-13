@@ -12,6 +12,9 @@ function _isArray(obj) {
 	return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
+/*
+	todo: what happens when badly formed xml is fed in?
+*/
 function parseStringIntoJs(xml){
 	return new Promise(function(resolve, reject){
 		parser.parseString(xml, function (err, result) {
