@@ -1,4 +1,5 @@
 
+console.log('hello rich');
 var malebrancheUtils = require('./malebranche-utils.js'),
     malebrancheIO = require('./malebranche-io.js'),
     parsePath  = require('svg-path-parser'),
@@ -234,6 +235,13 @@ exports.main = function(srcFile, name, hRefLength, vRefLength, x, y) {
 		.then(writeFile.bind(null, name))
 		.catch(errorHandler);
 
+};
+
+exports.transformString = function(src, hRefLength, vRefLength, x, y) {
+  return Promise.resolve(src)
+    .then(parseStringIntoJs)
+		.then(convertCoords.bind(null, hRefLength, vRefLength, x, y))
+		.then(serializeJSIntoString)
 };
 
 
