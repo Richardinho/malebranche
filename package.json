@@ -17,7 +17,6 @@
   "dependencies": {
     "command-line-args": "^4.0.4",
     "command-line-usage": "^4.0.0",
-    "svg-path-parser": "^1.0.1",
-    "xml2js": "^0.4.16"
+    "malebranche-lib": "0.0.5"
   }
 }
