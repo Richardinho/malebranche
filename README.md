@@ -95,6 +95,6 @@ The file doesn't need to include any svg at all (though obviously it doesn't do 
 
 ## License
 
-Copyright (c) 2016 Richard Hunter
+Copyright (c) 2020 Richard Hunter
 
 Licensed under the ISC License
