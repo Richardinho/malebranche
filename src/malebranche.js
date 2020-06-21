@@ -8,13 +8,16 @@ function errorHandler(error) {
   console.log('error', error);
 }
 
-exports.main = function(srcFile, name, hRefLength, vRefLength, minX, minY) {
+exports.main = function(srcFile, name, decimalPlaces) {
+  const options = {};
+
+  if (decimalPlaces) {
+    options.decimalPlaces = decimalPlaces;
+  }
+
   readFile(srcFile)
     .then((src) => {
-      return malebrancheLib.transform(src, hRefLength, vRefLength, {
-        minX,
-        minY,
-      });
+      return malebrancheLib.transform(src, options);
     })
     .then(writeFile.bind(null, name))
     .catch(errorHandler);
